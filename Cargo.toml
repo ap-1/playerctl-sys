@@ -1,6 +1,6 @@
 [package]
 name = "playerctl-sys"
-version = "2.4.3"
+version = "2.4.4"
 authors = ["ap-1 <anishp0828@gmail.com>"]
 edition = "2021"
 description = "Unsafe bindings to libplayerctl"
