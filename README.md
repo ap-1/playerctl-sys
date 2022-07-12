@@ -1,0 +1,10 @@
+# playerctl-sys
+
+Unsafe Rust bindings to libplayerctl. This crate makes use of the [playerctl](https://github.com/altdesktop/playerctl) source, which is licensed under LGPL-3.0. The crate's version number should match that of [playerctl](https://github.com/altdesktop/playerctl). If it becomes out of date, please create an issue. 
+
+Some API members require types from [glib-sys](https://gtk-rs.org/gtk-rs-core/stable/latest/docs/glib_sys/index.html), which are also exported from this crate for convenience. Note that the [glib](https://gtk-rs.org/gtk-rs-core/stable/latest/docs/glib/index.html) crate re-exports `glib-sys` as `glib::ffi`.
+
+## Relevant docs
+- [Playerctl reference manual](https://dubstepdish.com/playerctl/index.html)
+- [glib-sys crate docs](https://gtk-rs.org/gtk-rs-core/stable/latest/docs/glib_sys/index.html)
+- [GLib docs](https://docs.gtk.org/glib/index.html)
