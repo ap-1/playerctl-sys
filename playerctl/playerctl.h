@@ -26,7 +26,6 @@
 extern "C" {
 #endif
 
-#include <playerctl/playerctl-enum-types.h>
 #include <playerctl/playerctl-player-manager.h>
 #include <playerctl/playerctl-player-name.h>
 #include <playerctl/playerctl-player.h>
