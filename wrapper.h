@@ -1,1 +1,1 @@
-#include "playerctl/playerctl/playerctl.h"
+#include "playerctl/playerctl.h"
