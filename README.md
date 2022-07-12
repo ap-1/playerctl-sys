@@ -1,5 +1,8 @@
 # playerctl-sys
 
+[![Version](https://img.shields.io/crates/v/playerctl-sys)](https://crates.io/crates/playerctl-sys)
+[![License](https://img.shields.io/crates/l/playerctl-sys)](https://github.com/ap-1/playerctl-sys/blob/main/LICENSE)
+
 Unsafe Rust bindings to libplayerctl. This crate makes use of the [playerctl](https://github.com/altdesktop/playerctl) source, which is licensed under LGPL-3.0. 
 
 The major and minor version numbers of this crate should match those of [playerctl](https://github.com/altdesktop/playerctl). The patch number will vary. If this is not the case, it is likely that this crate is out of date; please create an issue. 
