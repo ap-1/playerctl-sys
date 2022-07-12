@@ -76,29 +76,33 @@ mod tests {
                 let data: gconstpointer = &player_name as *const _ as gconstpointer;
                 let element = g_list_find_custom(players, data, Some(compare_func));
 
-                // Free the strings by converting them back to CStrings
-                drop(CString::from_raw(name_cstr));
-                drop(CString::from_raw(instance_cstr));
-
-                let player_name = (*element).data as *mut PlayerctlPlayerName;
-                let mut player_error: *mut GError = std::ptr::null_mut();
-
-                let player = playerctl_player_new_from_name(player_name, &mut player_error);
-                let mut play_pause_error: *mut GError = std::ptr::null_mut();
-
-                if player.is_null() {
-                    println!("Could not create player");
+                if element.is_null() {
+                    println!("Spotify is not running");
                 } else {
-                    playerctl_player_play_pause(player, &mut play_pause_error);
-                    println!("Toggled spotify playing status");
-                }
+                    // Free the strings by converting them back to CStrings
+                    drop(CString::from_raw(name_cstr));
+                    drop(CString::from_raw(instance_cstr));
 
-                if !player_error.is_null() {
-                    g_error_free(player_error);
-                }
+                    let player_name = (*element).data as *mut PlayerctlPlayerName;
+                    let mut player_error: *mut GError = std::ptr::null_mut();
 
-                if !play_pause_error.is_null() {
-                    g_error_free(play_pause_error);
+                    let player = playerctl_player_new_from_name(player_name, &mut player_error);
+                    let mut play_pause_error: *mut GError = std::ptr::null_mut();
+
+                    if player.is_null() {
+                        println!("Could not create player");
+                    } else {
+                        playerctl_player_play_pause(player, &mut play_pause_error);
+                        println!("Toggled spotify playing status");
+                    }
+
+                    if !player_error.is_null() {
+                        g_error_free(player_error);
+                    }
+
+                    if !play_pause_error.is_null() {
+                        g_error_free(play_pause_error);
+                    }
                 }
             }
 
