@@ -10,6 +10,7 @@ The major and minor version numbers of this crate should match those of [playerc
 Some API members require types from [glib-sys](https://gtk-rs.org/gtk-rs-core/stable/latest/docs/glib_sys/index.html), which are also exported from this crate for convenience. Note that the [glib](https://gtk-rs.org/gtk-rs-core/stable/latest/docs/glib/index.html) crate re-exports `glib-sys` as `glib::ffi`.
 
 ## Relevant docs
+- [This crate's docs](https://ap-1.github.io/playerctl-sys/playerctl_sys/index.html)
 - [Playerctl reference manual](https://dubstepdish.com/playerctl/index.html)
 - [glib-sys crate docs](https://gtk-rs.org/gtk-rs-core/stable/latest/docs/glib_sys/index.html)
 - [GLib docs](https://docs.gtk.org/glib/index.html)
