@@ -1,3 +1,0 @@
-[submodule "playerctl"]
-	path = playerctl
-	url = https://github.com/altdesktop/playerctl
