@@ -1,0 +1,28 @@
+[package]
+name = "playerctl-sys"
+version = "0.1.5"
+authors = ["ap-1 <anishp0828@gmail.com>"]
+edition = "2021"
+description = "Unsafe bindings to libplayerctl"
+readme = "README.md"
+documentation = "https://docs.rs/playerctl-sys"
+homepage = "https://github.com/ap-1/playerctl-sys"
+repository = "https://github.com/ap-1/playerctl-sys"
+license = "LGPL-3.0-or-later"
+keywords = ["mpris", "dbus", "playerctl"]
+categories = ["external-ffi-bindings"]
+build = "src/build.rs"
+links = "playerctl"
+
+[build-dependencies]
+pkg-config = "0.3.25"
+bindgen = "0.60.1"
+meson = "1.0.0"
+
+[dependencies]
+glib-sys = { version = "0.15.10", features = ["v2_72"] }
+
+# Just for tooling, this isn't actually used
+[package.metadata.system-deps]
+glib = { name = "glib-2.0", version = "2.72" }
+playerctl = "2.4.1"
