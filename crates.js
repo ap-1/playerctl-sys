@@ -1,0 +1,1 @@
+window.ALL_CRATES = ["glib_sys","libc","playerctl_sys"];
