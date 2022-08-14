@@ -34,7 +34,7 @@ mod tests {
 
                 for n in 0..length {
                     // Get the name from the nth player in the list
-                    let player = g_list_nth_data(players, n) as *mut PlayerctlPlayerName;
+                    let player: *mut _PlayerctlPlayerName = g_list_nth_data(players, n).cast();
                     let name = CString::from_raw((*player).name);
 
                     // Output the player number and its name
@@ -70,8 +70,8 @@ mod tests {
 
                 // Create a function that compares items in the *mut GList
                 unsafe extern "C" fn compare_func(a: gconstpointer, b: gconstpointer) -> gint {
-                    let a = (*(a as *const PlayerctlPlayerName)).name;
-                    let b = (*(b as *const PlayerctlPlayerName)).name;
+                    let a = (*a.cast::<PlayerctlPlayerName>()).name;
+                    let b = (*b.cast::<PlayerctlPlayerName>()).name;
 
                     // Return 0 if the two strings are the same
                     CStr::from_ptr(a).cmp(CStr::from_ptr(b)) as gint
@@ -88,7 +88,7 @@ mod tests {
                     drop(CString::from_raw(name_cstr));
                     drop(CString::from_raw(instance_cstr));
 
-                    let player_name = (*element).data as *mut PlayerctlPlayerName;
+                    let player_name: *mut _PlayerctlPlayerName = (*element).data.cast();
 
                     let mut player_error: *mut GError = std::ptr::null_mut();
                     let player = playerctl_player_new_from_name(player_name, &mut player_error);
