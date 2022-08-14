@@ -11,7 +11,7 @@ You must have [**clang**](https://rust-lang.github.io/rust-bindgen/requirements.
 
 ## Relevant documentation
 
-- [playerctl-sys crate docs](https://docs.rs/playerctl-sys)
+- [playerctl-sys crate docs](https://ap-1.github.io/playerctl-sys/)
 - [glib-sys crate docs](https://gtk-rs.org/gtk-rs-core/stable/latest/docs/glib_sys/index.html)
 - [Playerctl reference manual](https://dubstepdish.com/playerctl/index.html)
 - [GLib docs](https://docs.gtk.org/glib/index.html)
