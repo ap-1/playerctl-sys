@@ -1,6 +1,6 @@
 [package]
 name = "playerctl-sys"
-version = "0.1.5"
+version = "0.1.6"
 authors = ["ap-1 <anishp0828@gmail.com>"]
 edition = "2021"
 description = "Unsafe bindings to libplayerctl"
@@ -20,7 +20,8 @@ bindgen = "0.60.1"
 meson = "1.0.0"
 
 [dependencies]
-glib-sys = { version = "0.15.10", features = ["v2_72"] }
+glib-sys = "0.15.10"
+gobject-sys = "0.15.10"
 
 # Just for tooling, this isn't actually used
 [package.metadata.system-deps]
