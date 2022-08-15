@@ -69,12 +69,12 @@ mod tests {
                 };
 
                 // Create a function that compares items in the *mut GList
-                unsafe extern "C" fn compare_func(a: gconstpointer, b: gconstpointer) -> gint {
+                unsafe extern "C" fn compare_func(a: gconstpointer, b: gconstpointer) -> i32 {
                     let a = (*a.cast::<PlayerctlPlayerName>()).name;
                     let b = (*b.cast::<PlayerctlPlayerName>()).name;
 
                     // Return 0 if the two strings are the same
-                    CStr::from_ptr(a).cmp(CStr::from_ptr(b)) as gint
+                    CStr::from_ptr(a).cmp(CStr::from_ptr(b)) as i32
                 }
 
                 // Convert the player name to a *const c_void (gconstpointer) and search for it
