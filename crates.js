@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["glib_sys","libc","playerctl_sys"];
+window.ALL_CRATES = ["glib_sys","gobject_sys","libc","playerctl_sys"];

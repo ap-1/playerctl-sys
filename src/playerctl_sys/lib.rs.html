@@ -160,7 +160,7 @@
 
                 <span class="kw">for</span> <span class="ident">n</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">length</span> {
                     <span class="comment">// Get the name from the nth player in the list</span>
-                    <span class="kw">let</span> <span class="ident">player</span> <span class="op">=</span> <span class="ident">g_list_nth_data</span>(<span class="ident">players</span>, <span class="ident">n</span>) <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">PlayerctlPlayerName</span>;
+                    <span class="kw">let</span> <span class="ident">player</span>: <span class="kw-2">*mut</span> <span class="ident">_PlayerctlPlayerName</span> <span class="op">=</span> <span class="ident">g_list_nth_data</span>(<span class="ident">players</span>, <span class="ident">n</span>).<span class="ident">cast</span>();
                     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">CString::from_raw</span>((<span class="kw-2">*</span><span class="ident">player</span>).<span class="ident">name</span>);
 
                     <span class="comment">// Output the player number and its name</span>
@@ -195,12 +195,12 @@
                 };
 
                 <span class="comment">// Create a function that compares items in the *mut GList</span>
-                <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">compare_func</span>(<span class="ident">a</span>: <span class="ident">gconstpointer</span>, <span class="ident">b</span>: <span class="ident">gconstpointer</span>) -&gt; <span class="ident">gint</span> {
-                    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> (<span class="kw-2">*</span>(<span class="ident">a</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">PlayerctlPlayerName</span>)).<span class="ident">name</span>;
-                    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> (<span class="kw-2">*</span>(<span class="ident">b</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">PlayerctlPlayerName</span>)).<span class="ident">name</span>;
+                <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">compare_func</span>(<span class="ident">a</span>: <span class="ident">gconstpointer</span>, <span class="ident">b</span>: <span class="ident">gconstpointer</span>) -&gt; <span class="ident">i32</span> {
+                    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>.<span class="ident">cast</span>::<span class="op">&lt;</span><span class="ident">PlayerctlPlayerName</span><span class="op">&gt;</span>()).<span class="ident">name</span>;
+                    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>.<span class="ident">cast</span>::<span class="op">&lt;</span><span class="ident">PlayerctlPlayerName</span><span class="op">&gt;</span>()).<span class="ident">name</span>;
 
                     <span class="comment">// Return 0 if the two strings are the same</span>
-                    <span class="ident">CStr::from_ptr</span>(<span class="ident">a</span>).<span class="ident">cmp</span>(<span class="ident">CStr::from_ptr</span>(<span class="ident">b</span>)) <span class="kw">as</span> <span class="ident">gint</span>
+                    <span class="ident">CStr::from_ptr</span>(<span class="ident">a</span>).<span class="ident">cmp</span>(<span class="ident">CStr::from_ptr</span>(<span class="ident">b</span>)) <span class="kw">as</span> <span class="ident">i32</span>
                 }
 
                 <span class="comment">// Convert the player name to a *const c_void (gconstpointer) and search for it</span>
@@ -214,7 +214,7 @@
                     <span class="ident">drop</span>(<span class="ident">CString::from_raw</span>(<span class="ident">name_cstr</span>));
                     <span class="ident">drop</span>(<span class="ident">CString::from_raw</span>(<span class="ident">instance_cstr</span>));
 
-                    <span class="kw">let</span> <span class="ident">player_name</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">element</span>).<span class="ident">data</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">PlayerctlPlayerName</span>;
+                    <span class="kw">let</span> <span class="ident">player_name</span>: <span class="kw-2">*mut</span> <span class="ident">_PlayerctlPlayerName</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">element</span>).<span class="ident">data</span>.<span class="ident">cast</span>();
 
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">player_error</span>: <span class="kw-2">*mut</span> <span class="ident">GError</span> <span class="op">=</span> <span class="ident">std::ptr::null_mut</span>();
                     <span class="kw">let</span> <span class="ident">player</span> <span class="op">=</span> <span class="ident">playerctl_player_new_from_name</span>(<span class="ident">player_name</span>, <span class="kw-2">&amp;mut</span> <span class="ident">player_error</span>);
